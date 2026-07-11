@@ -1,193 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yash Jagariya | Gaming • Editing • Learning</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yash Jagariya — Gaming • Editing • Building</title>
+  <meta name="description" content="Yash Jagariya's personal space. Valorant clips, AMV edits, and the coding journey behind them. Play. Create. Inspire." />
 
-    <meta name="description" content="Official website of Yash Jagariya - Gamer, Video Editor and Aspiring Full-Stack Developer.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Yash Jagariya" />
+  <meta property="og:description" content="Gaming • Editing • Building" />
+  <meta property="og:type" content="website" />
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈</text></svg>" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<nav>
+  <!-- ============ LOADING SCREEN ============ -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-cat">🐈</div>
+    <p class="loader-text">Loading<span class="loader-dots"></span></p>
+  </div>
 
-    <div class="logo">
-        YJ
-    </div>
+  <!-- ============ SCROLL PROGRESS BAR ============ -->
+  <div class="progress-bar" id="progressBar"></div>
 
-    <ul>
+  <!-- ============ CURSOR FOLLOWER ============ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-        <li><a href="#about">About</a></li>
+  <!-- ============ BACKGROUND LAYERS ============ -->
+  <div class="bg-stars" aria-hidden="true"></div>
+  <div class="bg-blob blob-a" aria-hidden="true"></div>
+  <div class="bg-blob blob-b" aria-hidden="true"></div>
 
-        <li><a href="#content">Content</a></li>
-
-        <li><a href="#connect">Connect</a></li>
-
-        <li><a href="#support">Support</a></li>
-
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo"><img src="assets/logo.jpg" alt="Yash Jagariya logo" class="nav-logo-img" /> <span>Yash</span></a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link" data-nav="about">About</a></li>
+      <li><a href="#featured" class="nav-link" data-nav="featured">Featured</a></li>
+      <li><a href="#connect" class="nav-link" data-nav="connect">Connect</a></li>
+      <li><a href="#support" class="nav-link" data-nav="support">Support</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-</nav>
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content">
+        <img src="assets/logo.jpg" alt="Yash Jagariya" class="hero-cat floating" />
+        <h1 class="hero-name">Yash Jagariya</h1>
+        <p class="hero-role">Gaming <span class="dot">•</span> Editing <span class="dot">•</span> Learning</p>
+        <p class="hero-tagline">
+          <span>Play.</span> <span>Create.</span> <span>Inspire.</span>
+        </p>
+        <a href="#about" class="btn-explore">
+          Explore <span class="arrow">↓</span>
+        </a>
+      </div>
+    </section>
 
+    <!-- ============ ABOUT ============ -->
+    <section class="about reveal" id="about">
+      <div class="section-inner">
+        <span class="eyebrow">About</span>
+        <h2 class="section-title">I build the things I'd want to use.</h2>
+        <p class="about-text">Hi! I'm Yash.</p>
+        <p class="about-text">
+          I enjoy creating Valorant clips, AMV edits, and learning web development. This
+          website is my personal space where you can find my content, connect with me, and
+          follow my journey as I continue to grow as both a creator and a developer.
+        </p>
+      </div>
+    </section>
 
+    <!-- ============ FEATURED ============ -->
+    <section class="featured reveal" id="featured">
+      <div class="section-inner">
+        <span class="eyebrow">Featured</span>
+        <h2 class="section-title">What I've been making</h2>
 
-<section class="hero">
+        <div class="card-grid">
+          <article class="glass-card">
+            <div class="card-icon">🎮</div>
+            <h3>Valorant</h3>
+            <p>Clips, ranked climbs, and clutch rounds worth rewatching.</p>
+            <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener" class="card-link">Watch clips →</a>
+          </article>
 
-    <img src="assets/logo.png" class="profile" alt="Profile">
+          <article class="glass-card">
+            <div class="card-icon">🎥</div>
+            <h3>AMVs</h3>
+            <p>Edits built frame-by-frame — pacing, sync, and impact over flash.</p>
+            <a href="https://instagram.com/stoic_yash" target="_blank" rel="noopener" class="card-link">See edits →</a>
+          </article>
 
-    <h1>Yash Jagariya</h1>
-
-    <h2>Gaming • Editing • Learning</h2>
-
-    <p>
-        Play. Create. Inspire.
-    </p>
-
-    <a href="#connect" class="hero-btn">
-        Connect With Me
-    </a>
-
-</section>
-
-
-
-<section id="about" class="about">
-
-    <h2>About Me</h2>
-
-    <p>
-
-        Hi! I'm Yash.
-
-        I enjoy creating Valorant clips, AMV edits, and learning web development.
-        This website is my personal space where you can find my content,
-        connect with me, and follow my journey as I continue to grow as both
-        a creator and a developer.
-
-    </p>
-
-</section>
-
-
-
-<section id="content" class="content">
-
-    <h2>Featured Content</h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h3>🎮 Valorant Clips</h3>
-
-            <p>
-                Gameplay highlights and memorable moments.
-            </p>
-
+          <article class="glass-card">
+            <div class="card-icon">💻</div>
+            <h3>Coding Journey</h3>
+            <p>Projects, experiments, and the occasional 2am breakthrough.</p>
+            <a href="https://github.com/yashjagariya036" target="_blank" rel="noopener" class="card-link">View projects →</a>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
+    <!-- ============ CONNECT ============ -->
+    <section class="connect reveal" id="connect">
+      <div class="section-inner">
+        <span class="eyebrow">Connect</span>
+        <h2 class="section-title">Find me elsewhere</h2>
 
-            <h3>🎥 AMV Edits</h3>
-
-            <p>
-                Anime edits and cinematic creations.
-            </p>
-
+        <div class="connect-grid">
+          <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener" class="connect-card" data-platform="YouTube">
+            <span class="connect-icon">▶️</span>
+            <span class="connect-name">YouTube</span>
+          </a>
+          <a href="https://instagram.com/stoic_yash" target="_blank" rel="noopener" class="connect-card" data-platform="Instagram">
+            <span class="connect-icon">📸</span>
+            <span class="connect-name">Instagram</span>
+          </a>
+          <a href="https://open.spotify.com/user/31kj2iiqbsv3kaqt272yjzzwbrlq" target="_blank" rel="noopener" class="connect-card" data-platform="Spotify">
+            <span class="connect-icon">🎧</span>
+            <span class="connect-name">Spotify</span>
+          </a>
+          <a href="https://github.com/yashjagariya036" target="_blank" rel="noopener" class="connect-card" data-platform="GitHub">
+            <span class="connect-icon">🐙</span>
+            <span class="connect-name">GitHub</span>
+          </a>
+          <div class="connect-card" data-platform="Discord">
+            <span class="connect-icon">🎮</span>
+            <span class="connect-name">Discord</span>
+            <span class="connect-handle">stoic_yash</span>
+          </div>
         </div>
+      </div>
+    </section>
 
-    </div>
+    <!-- ============ SUPPORT ============ -->
+    <section class="support reveal" id="support">
+      <div class="section-inner">
+        <span class="eyebrow">Support</span>
+        <h2 class="section-title">❤️ Support My Journey</h2>
+        <p class="about-text">
+          If something I made was worth your time, a small contribution helps keep the edits
+          coming and the projects shipping.
+        </p>
 
-</section>
-
-
-
-<section id="connect" class="connect">
-
-    <h2>Connect</h2>
-
-    <div class="cards">
-
-        <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" class="card">
-            🎮 YouTube
-        </a>
-
-        <a href="https://instagram.com/stoic_yash" target="_blank" class="card">
-            📷 Instagram
-        </a>
-
-        <a href="https://open.spotify.com/user/31kj2iiqbsv3kaqt272yjzzwbrlq" target="_blank" class="card">
-            🎵 Spotify
-        </a>
-
-        <a href="https://github.com/yashjagariya036" target="_blank" class="card">
-            💻 GitHub
-        </a>
-
-        <div class="card">
-            💬 Discord
-            <br>
-            <small>stoic_yash</small>
+        <div class="support-card glass-card">
+          <div class="qr-frame">
+            <img src="assets/qr.png" alt="UPI QR code" class="qr-image" />
+          </div>
+          <p class="upi-id">UPI ID: <span>yashjagariya036@oksbi</span></p>
         </div>
+      </div>
+    </section>
+  </main>
 
-    </div>
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <p>🐈 Yash Jagariya</p>
+    <p class="footer-sub">Play. Create. Inspire.</p>
+    <p class="footer-copy">© <span id="year"></span> Yash Jagariya. All rights reserved.</p>
+  </footer>
 
-</section>
-
-
-
-<section id="support" class="support">
-
-    <h2>❤️ Support My Journey</h2>
-
-    <p>
-
-        Every contribution helps me improve my setup,
-        create better edits,
-        and continue learning web development.
-
-    </p>
-
-    <img src="assets/qr.png" class="qr" alt="UPI QR">
-
-    <h3>
-
-        UPI ID
-
-    </h3>
-
-    <p>
-
-        yashjagariya036@oksbi
-
-    </p>
-
-</section>
-
-
-
-<footer>
-
-    © 2026 Yash Jagariya
-
-    <br>
-
-    Made with ❤️
-
-</footer>
-
-
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
