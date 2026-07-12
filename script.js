@@ -1,8 +1,7 @@
-
 /* ==========================================================================
-   YASH JAGARIYA — PERSONAL BRAND SITE
-   script.js — loading screen, scroll progress, active nav, reveal
-   animations, cursor follower, mobile nav, footer year
+   YASH JAGARIYA — script.js
+   loader, scroll progress, active nav, reveal, cursor glow, mobile nav,
+   terminal typewriter effect
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,18 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
   initActiveNav();
   initRevealAnimations();
   initMobileNav();
-  initFooterYear();
+  initTerminalTypewriter();
 });
 
 /* ---------- Loading Screen ---------- */
 function initLoader() {
   const loader = document.getElementById("loader");
   if (!loader) return;
-
   window.addEventListener("load", () => {
-    setTimeout(() => {
-      loader.classList.add("loaded");
-    }, 500);
+    setTimeout(() => loader.classList.add("loaded"), 450);
   });
 }
 
@@ -31,28 +27,22 @@ function initLoader() {
 function initProgressBar() {
   const bar = document.getElementById("progressBar");
   if (!bar) return;
-
   const update = () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    bar.style.width = `${progress}%`;
+    bar.style.width = `${docHeight > 0 ? (scrollTop / docHeight) * 100 : 0}%`;
   };
-
   window.addEventListener("scroll", update, { passive: true });
   update();
 }
 
-/* ---------- Cursor Glow Follower ---------- */
+/* ---------- Cursor Glow ---------- */
 function initCursorGlow() {
   const glow = document.getElementById("cursorGlow");
   if (!glow) return;
   if (window.matchMedia("(hover: none)").matches) return;
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let currentX = 0;
-  let currentY = 0;
+  let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
 
   window.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
@@ -60,16 +50,15 @@ function initCursorGlow() {
     glow.classList.add("active");
   });
 
-  function animate() {
-    currentX += (mouseX - currentX) * 0.15;
-    currentY += (mouseY - currentY) * 0.15;
+  (function animate() {
+    currentX += (mouseX - currentX) * 0.18;
+    currentY += (mouseY - currentY) * 0.18;
     glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
     requestAnimationFrame(animate);
-  }
-  animate();
+  })();
 }
 
-/* ---------- Active Navbar Link on Scroll ---------- */
+/* ---------- Active Nav on Scroll ---------- */
 function initActiveNav() {
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
@@ -80,9 +69,7 @@ function initActiveNav() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute("id");
-          navLinks.forEach((link) => {
-            link.classList.toggle("active", link.dataset.nav === id);
-          });
+          navLinks.forEach((link) => link.classList.toggle("active", link.dataset.nav === id));
         }
       });
     },
@@ -92,7 +79,7 @@ function initActiveNav() {
   sections.forEach((section) => observer.observe(section));
 }
 
-/* ---------- Scroll Reveal Animations ---------- */
+/* ---------- Reveal on Scroll ---------- */
 function initRevealAnimations() {
   const revealEls = document.querySelectorAll(".reveal");
   if (!revealEls.length) return;
@@ -112,7 +99,7 @@ function initRevealAnimations() {
   revealEls.forEach((el) => observer.observe(el));
 }
 
-/* ---------- Mobile Nav Toggle ---------- */
+/* ---------- Mobile Nav ---------- */
 function initMobileNav() {
   const toggle = document.getElementById("navToggle");
   const links = document.querySelector(".nav-links");
@@ -131,10 +118,75 @@ function initMobileNav() {
   });
 }
 
-/* ---------- Footer Year ---------- */
-function initFooterYear() {
-  const yearEl = document.getElementById("year");
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
+/* ---------- Terminal Typewriter ---------- */
+function initTerminalTypewriter() {
+  const body = document.getElementById("terminalBody");
+  if (!body) return;
+
+  // Edit these to update what shows in the "now" terminal card.
+  const lines = [
+    { prompt: "grinding →", value: "Valorant, climbing out of my current rank" },
+    { prompt: "editing →", value: "a new AMV, frame by frame" },
+    { prompt: "learning →", value: "full-stack dev, one broken build at a time" },
+    { prompt: "listening →", value: "whatever's on my Spotify right now" },
+  ];
+
+  const section = document.getElementById("now");
+  let started = false;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          typeLines(body, lines);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  if (section) observer.observe(section);
+}
+
+function typeLines(container, lines) {
+  let lineIndex = 0;
+
+  function typeNextLine() {
+    if (lineIndex >= lines.length) return;
+
+    const { prompt, value } = lines[lineIndex];
+    const lineEl = document.createElement("div");
+    lineEl.className = "terminal-line";
+
+    const promptEl = document.createElement("span");
+    promptEl.className = "prompt";
+    promptEl.textContent = prompt;
+    lineEl.appendChild(promptEl);
+
+    const valEl = document.createElement("span");
+    valEl.className = "val";
+    lineEl.appendChild(valEl);
+
+    const cursor = document.createElement("span");
+    cursor.className = "terminal-cursor-blink";
+    lineEl.appendChild(cursor);
+
+    container.appendChild(lineEl);
+
+    let charIndex = 0;
+    const interval = setInterval(() => {
+      valEl.textContent += value[charIndex];
+      charIndex++;
+      if (charIndex >= value.length) {
+        clearInterval(interval);
+        cursor.remove();
+        lineIndex++;
+        setTimeout(typeNextLine, 200);
+      }
+    }, 22);
   }
+
+  typeNextLine();
 }
