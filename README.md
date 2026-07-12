@@ -1,66 +1,55 @@
-# Yash Jagariya — Personal Brand Site
+# Yash Jagariya — Personal Space
 
-A dark, glassmorphic personal site. Matte black background, purple accent,
-Poppins type, Apple-style motion.
+Matte black, grain texture, asymmetric layout, terminal-style accents.
+Space Grotesk + JetBrains Mono. No glassmorphism, no centered symmetric grids.
 
 ## Files
 
 ```
-index.html   → structure & content
-style.css    → theme, layout, animations
-script.js    → loading screen, scroll progress, active nav, reveal, cursor glow
-assets/      → put your logo.png and qr.png here
-README.md    → this file
+index.html   -> structure & content
+style.css    -> theme, layout, animations, texture
+script.js    -> loader, scroll progress, active nav, reveal, cursor glow,
+                terminal typewriter effect
+assets/      -> logo.jpg, qr.png (your real files)
+README.md    -> this file
 ```
 
-## Already wired in
+## What's different from a generic template
 
-Your real logo, QR code, UPI ID, and social links are all in place:
-- `assets/logo.jpg` and `assets/qr.png` are your actual files
-- Connect section links to your real YouTube, Instagram, Spotify, GitHub,
-  and Discord (`stoic_yash`)
-- Support section shows your real UPI ID (`yashjagariya036@oksbi`)
-- Featured card links point to YouTube (Valorant), Instagram (AMVs), and
-  GitHub (Coding Journey) — update these individually if you'd rather link
-  to specific videos/posts/repos instead of your profile pages.
+- **Asymmetric hero** - big left-aligned type, off-center layout, not
+  centered-everything.
+- **"Now" terminal card** replaces a generic About paragraph - a
+  monospace terminal window that types itself out when scrolled into view.
+  Edit the `lines` array near the top of `initTerminalTypewriter()` in
+  `script.js` to update what it says.
+- **Bento grid** in Featured - one large card + two smaller, not three
+  equal boxes.
+- **Grain + grid texture** in the background instead of a plain gradient -
+  fills empty space without looking decorative.
+- **Connect as a link list**, not app-tile buttons - simpler, less
+  "dashboard."
+- **Personal footer line** instead of a copyright notice.
+
+## Things worth personalizing further
+
+- **Terminal lines** (`script.js`) - the four "currently" lines are a
+  reasonable guess; make them specifically true for you right now.
+- **Featured card links** - currently point at your YouTube channel,
+  Instagram, and GitHub profile pages. If you have one specific favorite
+  clip, edit, or repo, linking directly to that instead of your profile
+  homepage will feel more deliberate.
+- **Footer line** - "Made with coffee, late nights, and a questionable
+  sleep schedule" is a placeholder voice. Swap it for something that
+  actually sounds like you.
 
 ## Running locally
-
-No build step needed — it's plain HTML/CSS/JS. Just open `index.html` in a
-browser, or serve the folder:
 
 ```bash
 python3 -m http.server 8000
 ```
-
 Then visit `http://localhost:8000`.
 
 ## Deploying to GitHub Pages
 
-1. Push this folder to a repo named `yashjagariya036.github.io`
-   (or any repo, then enable Pages in Settings → Pages).
-2. Set the Pages source to the `main` branch, root folder.
-3. Your site goes live at `https://yashjagariya036.github.io`.
-
-## What's already built
-
-- Loading screen with fade-out
-- Scroll progress bar
-- Cursor glow follower (desktop only, respects reduced-motion)
-- Active nav-link highlighting on scroll
-- Scroll-triggered reveal animations on each section
-- Floating hero logo + purple hero glow
-- Glassmorphic cards with hover lift + glow (Featured, Connect, Support)
-- Responsive mobile nav with hamburger toggle
-- Auto-updating footer year
-- `prefers-reduced-motion` respected throughout
-
-## Ready for later
-
-The structure leaves room to add, without a redesign:
-- YouTube embeds inside the Featured cards
-- A GitHub repo/projects grid
-- A blog section
-- A contact form
-- Analytics script tag in `<head>`
-- Custom domain (add a `CNAME` file for GitHub Pages)
+Push to `yashjagariya036.github.io` on the `main` branch, root folder -
+same as your current setup. No build step needed.
