@@ -1,186 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yash Jagariya — Gaming • Editing • Learning</title>
-  <meta name="description" content="Yash Jagariya's personal space. Valorant clips, AMV edits, and the coding journey behind them." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash Jagariya</title>
+<meta name="description" content="Yash Jagariya — Valorant clips, AMV edits, and a web dev journey in progress.">
 
-  <meta property="og:title" content="Yash Jagariya" />
-  <meta property="og:description" content="Gaming • Editing • Learning" />
-  <meta property="og:type" content="website" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/favicon-192.png">
 
-  <link rel="icon" href="assets/logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg-deep:#0b090e;
+    --bg-panel:#151119;
+    --bg-panel-2:#1c1620;
+    --line:rgba(224,214,230,0.08);
+    --line-strong:rgba(224,214,230,0.15);
+    --text-hi:#e9e3ea;
+    --text-mid:#9c8fa6;
+    --text-low:#5a5162;
+    --purple:#8d74a8;
+    --purple-soft:#6a5680;
+    --purple-deep:#3c2f4a;
+    --ember:#a06a4d;
+    --gold:#a68f5c;
+    --display:'Cinzel', serif;
+    --body:'Inter', sans-serif;
+  }
 
-  <link rel="stylesheet" href="style.css" />
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important; transition:none !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--text-hi);
+    font-family:var(--body);
+    line-height:1.7;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(ellipse 900px 600px at 20% 0%, rgba(141,116,168,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 30%, rgba(60,47,74,0.35), transparent 60%);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--purple-deep); color:var(--text-hi);}
+  :focus-visible{outline:1px solid var(--purple); outline-offset:3px;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  .eyebrow{
+    font-family:var(--display);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--purple);
+    font-weight:500;
+  }
+
+  h1,h2,h3{font-family:var(--display); margin:0; font-weight:500; letter-spacing:0.01em;}
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ---------- souls-style thin frame ---------- */
+  .frame{
+    border:1px solid var(--line-strong);
+    position:relative;
+  }
+  .frame::before{
+    content:"";
+    position:absolute; inset:5px;
+    border:1px solid rgba(166,143,92,0.18);
+    pointer-events:none;
+  }
+
+  /* ---------- buttons: outline, slow fill sweep ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:13px 26px;
+    font-family:var(--display);
+    font-size:12.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--text-hi);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    transition:border-color .4s ease, color .4s ease;
+  }
+  .btn::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, var(--purple-deep), var(--purple-soft));
+    transform:translateX(-101%);
+    transition:transform .5s cubic-bezier(.65,0,.35,1);
+    z-index:-1;
+  }
+  .btn:hover::before{transform:translateX(0);}
+  .btn:hover{border-color:var(--purple); color:#fff;}
+  .btn-quiet{opacity:0.8;}
+  .btn-quiet:hover{opacity:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    backdrop-filter:blur(10px);
+    background:rgba(11,9,14,0.75);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:1080px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:11px;}
+  .brand img{width:26px; height:26px; image-rendering:pixelated; opacity:0.92;}
+  .brand-name{font-family:var(--display); font-weight:500; font-size:14px; letter-spacing:0.08em;}
+
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{
+    font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-mid); font-weight:500;
+    position:relative; padding:4px 0 4px 14px;
+    transition:color .3s ease;
+  }
+  .nav-links a::before{
+    content:""; position:absolute; left:0; top:50%; transform:translateY(-50%) scaleY(0);
+    width:2px; height:12px; background:var(--purple);
+    transition:transform .3s ease;
+    transform-origin:center;
+  }
+  .nav-links a:hover{color:var(--text-hi);}
+  .nav-links a:hover::before{transform:translateY(-50%) scaleY(1);}
+  @media(max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding:150px 0 90px; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero h1{
+    font-size:clamp(28px, 3.6vw, 40px);
+    line-height:1.35;
+    margin:18px 0 22px;
+    font-weight:500;
+    max-width:14ch;
+  }
+  .hero p.lead{font-size:15.5px; color:var(--text-mid); max-width:42ch; margin-bottom:34px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  /* embers */
+  .embers{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;}
+  .ember{
+    position:absolute; bottom:-10px;
+    width:3px; height:3px; border-radius:50%;
+    background:var(--ember);
+    box-shadow:0 0 6px 1px rgba(160,106,77,0.7);
+    opacity:0;
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{opacity:0; transform:translate(0,0);}
+    8%{opacity:0.7;}
+    90%{opacity:0.35;}
+    100%{opacity:0; transform:translate(var(--dx,20px), -420px);}
+  }
+
+  .portrait-wrap{position:relative; display:flex; justify-content:center;}
+  .portrait{
+    width:min(320px, 80%);
+    aspect-ratio:4/5;
+    padding:10px;
+    background:linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+    transition:transform .3s ease;
+  }
+  .portrait img{width:100%; height:100%; object-fit:cover; filter:saturate(0.92) contrast(1.03);}
+  .portrait-glow{
+    position:absolute; inset:-30px; z-index:-1;
+    background:radial-gradient(circle at 50% 40%, rgba(141,116,168,0.20), transparent 65%);
+    animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{opacity:0.55; transform:scale(1);}
+    50%{opacity:0.9; transform:scale(1.05);}
+  }
+  .portrait-caption{
+    text-align:center; margin-top:16px;
+    font-family:var(--display); font-size:12px; letter-spacing:0.18em;
+    color:var(--text-low); text-transform:uppercase;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0;}
+  .section-head{margin-bottom:42px; max-width:56ch;}
+  .section-head h2{font-size:clamp(21px,2.6vw,27px); margin-top:12px; font-weight:500;}
+  .section-head p{color:var(--text-mid); margin-top:12px; font-size:14.5px;}
+
+  /* ---------- about ---------- */
+  #about .about-grid{display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:start;}
+  @media(max-width:860px){ #about .about-grid{grid-template-columns:1fr;} }
+  #about .bio p{color:var(--text-mid); font-size:15.5px; margin-bottom:16px;}
+  #about .bio strong{color:var(--text-hi); font-weight:600;}
+
+  .status-panel{background:var(--bg-panel); padding:26px;}
+  .status-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 0; border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .status-row:last-child{border-bottom:none;}
+  .status-row .k{font-family:var(--display); font-size:10.5px; letter-spacing:0.14em; color:var(--text-low); text-transform:uppercase;}
+  .status-row .v{color:var(--text-hi); font-weight:500;}
+
+  /* ---------- content cards ---------- */
+  .content-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
+  @media(max-width:860px){ .content-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--bg-deep);
+    padding:30px 26px;
+    transition:background .35s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{background:var(--bg-panel);}
+  .card .icon{width:22px; height:22px; color:var(--purple); margin-bottom:20px;}
+  .card h3{font-size:15px; margin-bottom:10px; font-weight:500; letter-spacing:0.03em;}
+  .card p{color:var(--text-mid); font-size:14px; margin-bottom:24px; flex-grow:1;}
+  .card .card-link{
+    font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;
+    color:var(--text-mid); display:inline-flex; align-items:center; gap:8px;
+    transition:color .3s ease, gap .3s ease;
+  }
+  .card:hover .card-link{color:var(--purple);}
+
+  /* ---------- connect ---------- */
+  .connect-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px; background:var(--line);}
+  .connect-card{
+    background:var(--bg-deep);
+    padding:20px 22px;
+    display:flex; align-items:center; gap:14px;
+    cursor:pointer;
+    transition:background .3s ease;
+    position:relative;
+    border:none; width:100%; text-align:left; font:inherit; color:inherit;
+  }
+  .connect-card:hover{background:var(--bg-panel);}
+  .connect-card .icon{width:16px; height:16px; color:var(--text-mid); transition:color .3s ease;}
+  .connect-card:hover .icon{color:var(--purple);}
+  .connect-card .cc-label{font-family:var(--display); font-weight:500; font-size:13px; letter-spacing:0.03em;}
+  .connect-card .cc-handle{font-size:11.5px; color:var(--text-low); margin-top:2px;}
+  .connect-card .cc-toast{
+    position:absolute; right:18px; top:50%; transform:translateY(-50%);
+    font-size:11px; color:var(--gold); font-weight:600;
+    opacity:0; transition:opacity .3s ease;
+  }
+  .connect-card.copied .cc-toast{opacity:1;}
+
+  /* ---------- support ---------- */
+  .support-panel{
+    background:var(--bg-panel);
+    padding:40px;
+    display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+  }
+  @media(max-width:700px){ .support-panel{grid-template-columns:1fr; text-align:center; justify-items:center;} }
+  .support-panel p{color:var(--text-mid); font-size:14.5px; max-width:44ch; margin:14px 0 20px;}
+  .qr-box{background:#f4f2f0; padding:12px; width:140px; height:140px;}
+  .qr-box img{width:100%; height:100%; object-fit:contain;}
+  .upi-pill{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--bg-deep); border:1px solid var(--line-strong);
+    padding:10px 16px; font-size:13px; cursor:pointer;
+    transition:border-color .3s ease;
+  }
+  .upi-pill:hover{border-color:var(--purple);}
+  .upi-pill svg{color:var(--purple); width:14px; height:14px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:34px 0;}
+  footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+  footer .f-brand{display:flex; align-items:center; gap:10px; color:var(--text-low); font-size:12.5px;}
+  footer .f-brand img{width:16px; height:16px; image-rendering:pixelated; opacity:0.8;}
+  footer .back-top{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-low); transition:color .3s ease;}
+  footer .back-top:hover{color:var(--purple);}
+</style>
 </head>
 <body>
 
-  <!-- ============ LOADING SCREEN ============ -->
-  <div id="loader" class="loader" aria-hidden="true">
-    <p class="loader-text">yashjagariya036<span class="loader-cursor">_</span></p>
-  </div>
-
-  <!-- ============ SCROLL PROGRESS BAR ============ -->
-  <div class="progress-bar" id="progressBar"></div>
-
-  <!-- ============ CURSOR FOLLOWER ============ -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <!-- ============ TEXTURE LAYERS ============ -->
-  <div class="bg-grain" aria-hidden="true"></div>
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-stars" aria-hidden="true"></div>
-
-  <!-- ============ NAVBAR ============ -->
-  <nav class="navbar" id="navbar">
-    <a href="#hero" class="nav-logo">
-      <img src="assets/logo.jpg" alt="" class="nav-logo-img" />
-      <span>yash</span>
+<header>
+  <nav>
+    <a href="#" class="brand" aria-label="Home">
+      <img src="assets/cat-nav.png" alt="Pixel cat mark">
+      <span class="brand-name">YASH JAGARIYA</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#now" class="nav-link" data-nav="now">now</a></li>
-      <li><a href="#featured" class="nav-link" data-nav="featured">featured</a></li>
-      <li><a href="#connect" class="nav-link" data-nav="connect">connect</a></li>
-      <li><a href="#support" class="nav-link" data-nav="support">support</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#content">Content</a>
+      <a href="#connect">Connect</a>
+      <a href="#support">Support</a>
+    </div>
   </nav>
+</header>
 
-  <main>
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="hero-grid">
-        <div class="hero-main">
-          <p class="hero-kicker">// personal space of</p>
-          <h1 class="hero-name">
-            <span class="line">Yash</span>
-            <span class="line">Jagariya</span>
-          </h1>
-          <div class="hero-tags">
-            <span class="tag">gaming</span>
-            <span class="tag">editing</span>
-            <span class="tag">learning</span>
-          </div>
-        </div>
-        <div class="hero-side">
-          <img src="assets/logo.jpg" alt="Yash Jagariya" class="hero-photo" />
-          <a href="#now" class="btn-explore">
-            scroll down <span class="arrow">↓</span>
-          </a>
+<main>
+  <section class="hero">
+    <div class="embers" id="embers" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Gamer · Editor · Builder</span>
+        <h1>Clips, edits, and a few things still being built.</h1>
+        <p class="lead">Valorant highlights, anime edits, and a slowly-growing set of web projects — figuring it out in public, one upload at a time.</p>
+        <div class="hero-ctas">
+          <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener" class="btn">Watch</a>
+          <a href="https://instagram.com/stoic_yash" target="_blank" rel="noopener" class="btn btn-quiet">Follow</a>
         </div>
       </div>
-    </section>
-
-    <!-- ============ NOW (terminal-style, replaces About) ============ -->
-    <section class="now reveal" id="now">
-      <div class="section-inner">
-        <span class="eyebrow">01 / now</span>
-        <div class="terminal-card">
-          <div class="terminal-head">
-            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-            <span class="terminal-title">currently.sh</span>
+      <div class="portrait-wrap reveal" id="portraitWrap">
+        <div class="portrait-glow"></div>
+        <div>
+          <div class="portrait frame" id="portrait">
+            <img src="assets/pfp.jpg" alt="Yash Jagariya">
           </div>
-          <div class="terminal-body" id="terminalBody">
-            <!-- lines injected by script.js as a typewriter effect -->
-          </div>
+          <div class="portrait-caption">Yash Jagariya</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ FEATURED (bento grid) ============ -->
-    <section class="featured reveal" id="featured">
-      <div class="section-inner">
-        <span class="eyebrow">02 / featured</span>
-        <h2 class="section-title">What I'm making</h2>
-
-        <div class="bento-grid">
-          <article class="bento-card bento-large">
-            <span class="bento-tag">valorant</span>
-            <h3>Clips worth the replay button</h3>
-            <p>Ranked climbs, clutch rounds, the ones I actually rewatch myself.</p>
-            <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener" class="bento-link">watch on youtube →</a>
-          </article>
-
-          <article class="bento-card">
-            <span class="bento-tag">amv</span>
-            <h3>Edits</h3>
-            <p>Frame-by-frame, sync over flash.</p>
-            <a href="https://instagram.com/stoic_yash" target="_blank" rel="noopener" class="bento-link">see on instagram →</a>
-          </article>
-
-          <article class="bento-card">
-            <span class="bento-tag">code</span>
-            <h3>Coding journey</h3>
-            <p>Projects, breakage, the occasional working build.</p>
-            <a href="https://github.com/yashjagariya036" target="_blank" rel="noopener" class="bento-link">view github →</a>
-          </article>
-        </div>
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="bio reveal">
+        <span class="eyebrow">About</span>
+        <h2 style="margin-top:14px;">Hey, I'm Yash.</h2>
+        <p>I split most of my time between three screens: one running <strong>ranked Valorant</strong>, one full of editing timelines, and one with code I'm still learning to write.</p>
+        <p>This site is where those three things overlap — <strong>clips</strong> worth replaying, <strong>edits</strong> worth watching, and a <strong>dev journey</strong> worth following, messy parts included.</p>
       </div>
-    </section>
+      <div class="status-panel frame reveal">
+        <div class="status-row"><span class="k">Plays</span><span class="v">Valorant</span></div>
+        <div class="status-row"><span class="k">Edits</span><span class="v">AMVs &amp; montages</span></div>
+        <div class="status-row"><span class="k">Builds</span><span class="v">Web, in progress</span></div>
+        <div class="status-row"><span class="k">Status</span><span class="v">Online &amp; editing</span></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============ CONNECT ============ -->
-    <section class="connect reveal" id="connect">
-      <div class="section-inner">
-        <span class="eyebrow">03 / connect</span>
-        <h2 class="section-title">Find me elsewhere</h2>
+  <section id="content">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Featured</span>
+        <h2>Where the work lives</h2>
+        <p>Three lanes, one person. Pick whichever one you're here for.</p>
+      </div>
+      <div class="content-grid reveal">
 
-        <div class="connect-grid">
-          <a href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener" class="connect-row">
-            <span class="connect-label">youtube</span>
-            <span class="connect-arrow">→</span>
-          </a>
-          <a href="https://instagram.com/stoic_yash" target="_blank" rel="noopener" class="connect-row">
-            <span class="connect-label">instagram</span>
-            <span class="connect-arrow">→</span>
-          </a>
-          <a href="https://open.spotify.com/user/31kj2iiqbsv3kaqt272yjzzwbrlq" target="_blank" rel="noopener" class="connect-row">
-            <span class="connect-label">spotify</span>
-            <span class="connect-arrow">→</span>
-          </a>
-          <a href="https://github.com/yashjagariya036" target="_blank" rel="noopener" class="connect-row">
-            <span class="connect-label">github</span>
-            <span class="connect-arrow">→</span>
-          </a>
-          <div class="connect-row connect-row-static">
-            <span class="connect-label">discord</span>
-            <span class="connect-handle">stoic_yash</span>
+        <div class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L12 22 M2 12 L22 12"/><circle cx="12" cy="12" r="6"/></svg>
+          <h3>Valorant Clips</h3>
+          <p>Gameplay highlights, clutch rounds, and the plays that were worth hitting record for.</p>
+          <a class="card-link" href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener">Watch clips →</a>
+        </div>
+
+        <div class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 9h18M8 5v4M16 5v4"/></svg>
+          <h3>AMV Edits</h3>
+          <p>Anime moments cut to music — cinematic edits built one frame at a time.</p>
+          <a class="card-link" href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener">Watch edits →</a>
+        </div>
+
+        <div class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 6 L3 12 L8 18 M16 6 L21 12 L16 18"/></svg>
+          <h3>Web Dev Log</h3>
+          <p>Following along as I learn full-stack development — small projects, real progress.</p>
+          <a class="card-link" href="https://github.com/yashjagariya036" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="connect">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Connect</span>
+        <h2>Find me elsewhere</h2>
+        <p>Pick a platform — or just say hi on Discord.</p>
+      </div>
+      <div class="connect-grid reveal">
+        <a class="connect-card" href="https://www.youtube.com/channel/UCm4WE4n3p6N5NEcEJ11sebQ" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6 L20 12 L8 18 Z"/></svg>
+          <span><span class="cc-label">YouTube</span><br><span class="cc-handle">Clips &amp; edits</span></span>
+        </a>
+        <a class="connect-card" href="https://instagram.com/stoic_yash" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          <span><span class="cc-label">Instagram</span><br><span class="cc-handle">@stoic_yash</span></span>
+        </a>
+        <a class="connect-card" href="https://open.spotify.com/user/31kj2iiqbsv3kaqt272yjzzwbrlq" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M7 10c3-1 7-1 10 1M7.5 13c2.5-.8 5.5-.5 8 1M8 16c2-.6 4-.4 6 .6" stroke-linecap="round"/></svg>
+          <span><span class="cc-label">Spotify</span><br><span class="cc-handle">What I'm playing</span></span>
+        </a>
+        <a class="connect-card" href="https://github.com/yashjagariya036" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9 L3 12 L6 15 M18 9 L21 12 L18 15 M14 6 L10 18"/></svg>
+          <span><span class="cc-label">GitHub</span><br><span class="cc-handle">Code &amp; projects</span></span>
+        </a>
+        <button class="connect-card" id="discordCopy" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M9 12v0M15 12v0M4 10c2-2 14-2 16 0" stroke-linecap="round"/></svg>
+          <span><span class="cc-label">Discord</span><br><span class="cc-handle">stoic_yash</span></span>
+          <span class="cc-toast">Copied</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="support">
+    <div class="wrap">
+      <div class="support-panel frame reveal">
+        <div>
+          <span class="eyebrow">Support</span>
+          <h2 style="margin-top:14px; font-size:20px;">Support the journey</h2>
+          <p>Every contribution helps me improve my setup, sharpen my edits, and keep learning to build.</p>
+          <div class="upi-pill" id="upiCopy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="12" height="12" rx="2"/><path d="M9 20h8a2 2 0 0 0 2-2V9"/></svg>
+            <span id="upiText">yashjagariya036@oksbi</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ SUPPORT ============ -->
-    <section class="support reveal" id="support">
-      <div class="section-inner">
-        <span class="eyebrow">04 / support</span>
-        <h2 class="section-title">If any of this was worth your time</h2>
-        <p class="support-text">
-          A small contribution helps keep the edits coming and the setup running. No pressure — just an option.
-        </p>
-
-        <div class="support-card">
-          <div class="qr-frame">
-            <img src="assets/qr.png" alt="UPI QR code" class="qr-image" />
-          </div>
-          <p class="upi-id">upi: <span>yashjagariya036@oksbi</span></p>
+        <div class="qr-box">
+          <img src="assets/qr.png" alt="UPI QR code">
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <p class="footer-line">Made with coffee, late nights, and a questionable sleep schedule.</p>
-    <p class="footer-sign">— Yash</p>
-  </footer>
+<footer>
+  <div class="wrap">
+    <div class="f-brand">
+      <img src="assets/cat-nav.png" alt="">
+      © 2026 Yash Jagariya
+    </div>
+    <a href="#" class="back-top">Back to top</a>
+  </div>
+</footer>
 
-  <script src="script.js"></script>
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // embers
+  const emberField = document.getElementById('embers');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && emberField){
+    const count = window.innerWidth < 700 ? 10 : 18;
+    for(let i=0;i<count;i++){
+      const e = document.createElement('div');
+      e.className = 'ember';
+      const left = Math.random()*100;
+      const duration = 9 + Math.random()*8;
+      const delay = Math.random()*12;
+      const dx = (Math.random()*60-30) + 'px';
+      e.style.left = left+'%';
+      e.style.setProperty('--dx', dx);
+      e.style.animationDuration = duration+'s';
+      e.style.animationDelay = delay+'s';
+      emberField.appendChild(e);
+    }
+  }
+
+  // subtle portrait parallax
+  const portraitWrap = document.getElementById('portraitWrap');
+  const portrait = document.getElementById('portrait');
+  if(!reduceMotion && portraitWrap && window.matchMedia('(hover:hover)').matches){
+    portraitWrap.addEventListener('mousemove', (ev)=>{
+      const r = portraitWrap.getBoundingClientRect();
+      const px = (ev.clientX - r.left)/r.width - 0.5;
+      const py = (ev.clientY - r.top)/r.height - 0.5;
+      portrait.style.transform = `rotateY(${px*6}deg) rotateX(${-py*6}deg)`;
+    });
+    portraitWrap.addEventListener('mouseleave', ()=>{ portrait.style.transform = 'rotateY(0) rotateX(0)'; });
+  }
+
+  // copy actions
+  const discordBtn = document.getElementById('discordCopy');
+  discordBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText('stoic_yash').catch(()=>{});
+    discordBtn.classList.add('copied');
+    setTimeout(()=> discordBtn.classList.remove('copied'), 1600);
+  });
+
+  const upiBtn = document.getElementById('upiCopy');
+  upiBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText('yashjagariya036@oksbi').catch(()=>{});
+    const t = document.getElementById('upiText');
+    const original = t.textContent;
+    t.textContent = 'Copied to clipboard';
+    setTimeout(()=> t.textContent = original, 1600);
+  });
+</script>
+
 </body>
 </html>
